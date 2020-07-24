@@ -23,6 +23,27 @@ body {
     line-height: 35px;
     font-size: 20px;
 }
+
+.register-login {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 35px;
+    line-height: 35px;
+
+}
+
+.user-info {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    display: none;
+    color: #666;
+    height: 35px;
+    line-height: 35px;
+    font-size: 16px;
+    margin-right: 10px;
+}
 .nav-btn {
     position: absolute;
     top: 0;
@@ -102,6 +123,11 @@ body {
     background-color: rgba(0, 0, 0, 0.7);
     display: none;
 }
+
+.factory-list-div {
+    padding-top: 100px;
+}
+
 .house-list {
     padding-top: 70px;
 }
@@ -123,7 +149,7 @@ body {
     overflow: hidden;
     border: 3px solid #fff;
 }
-.house-price {
+.factory-price {
     display: inline-block;
     position: absolute;
     right: 0;
@@ -136,14 +162,14 @@ body {
     color: #fff;
     font-size: 14px;
 }
-.house-price>span {
+.factory-price>span {
     font-size: 30px;
 }
-.house-intro {
+.factory-intro {
     padding: 5px 10px;
     line-height: 20px;
 }
-.house-title {
+.factory-title {
     display: block;
     white-space: nowrap;
     overflow: hidden;
@@ -151,7 +177,7 @@ body {
     font-size: 14px;
     color: #333;
 }
-.house-intro>em {
+.factory-intro>em {
     display: block;
     width: 100%;
     white-space: nowrap;

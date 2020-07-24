@@ -89,7 +89,7 @@ $(document).ready(function(){
     $('#form-factory-image').submit(function (e) {
         e.preventDefault();
         $(this).ajaxSubmit({
-            url: "/factory/image_factory/",
+            url: "/factory/images/",
             type: "post",
             dataType: "json",
             success: function (data) {
@@ -104,7 +104,8 @@ $(document).ready(function(){
     //为房屋表单绑定提交事件
     $('#form-factory-info').submit(function () {
         $('.error-msg text-center').hide();
-        $.post('/factory/new_factory/',$(this).serialize(),function (data) {
+        console.log($(this).serialize());
+        $.post('/factory/add/',$(this).serialize(),function (data) {
             if(data.code== '200'){
                 $('#form-factory-info').hide();
                 $('#form-factory-image').show();
@@ -116,5 +117,17 @@ $(document).ready(function(){
         return false;
     });
 
+
+     function adjustWidth() {
+       var parentwidth = $(".container").width();
+       $(".top-bar").width(parentwidth);
+     }
+
+     $(window).resize(
+     function() {
+       adjustWidth();
+     });
+
+     adjustWidth();
 
 })

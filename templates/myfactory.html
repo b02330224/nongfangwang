@@ -29,14 +29,14 @@
                     </div>
                 </li>
             </ul>
-            <ul id="factorys-list" class="houses-list">
+            <ul id="factory-list" class="factory-list">
                 <li>
                     <div class="new-house">
-                        <a href="/factory/new_factory/">发布新厂房</a>
+                        <a href="/factory/add/">发布新厂房</a>
                     </div>
                 </li>
                 {% raw %}
-                <script id="factory_list" type="text/html">
+                <script id="factory_list_script" type="text/html">
                     {{ each flist as factory }}
                 <li>
                     <a href="/factory/detail/?id={{factory.id}}">
@@ -72,5 +72,5 @@
     <script src="/static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="/static/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
     <script src="/static/js/template.js"></script>
-    <script src="/static/js/ihome/myfacory.js"></script>
+    <script src="/static/js/ihome/myfactory.js"></script>
 {% endblock %}

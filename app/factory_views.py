@@ -4,6 +4,8 @@ import os
 from flask import Blueprint, render_template, request, session, jsonify
 from app.models import User, Facility, FactoryImage, Village, Factory, Street, City, Area
 from utils import status_code
+from utils.funtions import is_login
+from utils.config import Config
 
 
 factory_blueprint = Blueprint('factory', __name__)
@@ -26,7 +28,7 @@ def factory():
 '''
 
 
-@factory_blueprint.route('/findex/', methods=['GET'])
+@factory_blueprint.route('/list/', methods=['GET'])
 def index():
     # 返回最新的5个房屋信息
     flist = Factory.query.order_by(Factory.id.desc()).all()[:5]
@@ -86,8 +88,28 @@ def my_factory():
         return render_template('myfactory.html')
 
 
-@factory_blueprint.route('/new_factory/', methods=['GET', 'POST'])
-def new_house():
+@factory_blueprint.route('/my_auth/')
+def my_auth():
+    """
+    验证当前用户是否完成实名认证
+    """
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    if user.id_name:
+        # 已经完成实名认证，查询当前用户的房屋信息
+        factory_list = Factory.query.filter(Factory.user_id == user_id).order_by(Factory.id.desc())
+        factory_list2 = []
+        for factory in factory_list:
+            factory_list2.append(factory.to_dict())
+        return jsonify(code='200', flist=factory_list2)
+    else:
+        # 没有完成实名认证
+        return jsonify(status_code.MYHOUSE_USER_IS_NOT_AUTH)
+
+
+@factory_blueprint.route('/add/', methods=['GET', 'POST'])
+@is_login
+def new_factory():
     if request.method == 'GET':
         return render_template('newfactory.html')
 
@@ -99,16 +121,19 @@ def new_house():
         # 创建用户信息
         fac = Factory()
         fac.user_id = session['user_id']
+        fac.city_id = params.get('city_id')
         fac.area_id = params.get('area_id')
+        fac.street_id = params.get('street_id')
+        fac.village_id = params.get('village_id')
         fac.title = params.get('title')
         fac.price = params.get('price')
+        fac.content = params.get('content')
         fac.address = params.get('address')
         fac.room_count = params.get('room_count')
         fac.acreage = params.get('acreage')
-        fac.beds = params.get('beds')
         fac.unit = params.get('unit')
-        fac.capacity = params.get('capacity')
-        fac.deposit = params.get('deposit')
+        fac.contact_person = params.get('contact_person')
+        fac.contact_mobile = params.get('contact_mobile')
 
         # 根据设施的编号查询设施对象
         if facility_ids:
@@ -116,7 +141,33 @@ def new_house():
             fac.facilities = facility_list
         fac.add_update()
         # 返回结果
-        return jsonify(code='200', house_id=fac.id)
+        return jsonify(code='200', factory_id=fac.id)
+
+
+@factory_blueprint.route('/images/', methods=['POST'])
+def factory_house():
+    if request.method == 'POST':
+        # 接收房屋编号
+        factory_id = request.form.get('factory_id')
+        # 接收图片信息
+        f1 = request.files.get('factory_image')
+        # 保存到图片
+        con = Config()
+        url = os.path.join(os.path.join(con.UPLOAD_FOLDER, 'factory'), f1.filename)
+        f1.save(url)
+
+        # 保存图片对象
+        image = FactoryImage()
+        image.factory_id = factory_id
+        image.url = os.path.join('/static/upload/factory', f1.filename)
+        image.add_update()
+        # 房屋的默认图片
+        factory = Factory.query.get(factory_id)
+        if not factory.index_image_url:
+            factory.index_image_url = os.path.join('/static/upload/factory', f1.filename)
+            factory.add_update()
+        # 返回图片信息
+        return jsonify(code='200', url=os.path.join('/static/upload/factory', f1.filename))
 
 
 @factory_blueprint.route('/area/')

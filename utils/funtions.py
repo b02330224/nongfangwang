@@ -34,9 +34,11 @@ def is_login(view_fun):
             if 'user_id' in session:
                 return view_fun()
             else:
+                print("session not found user_id")
                 return redirect('/user/login/')
         except Exception as e:
-            return redirect('/user/login/')
+            print("exception:{}".format(e))
+
     return decorator
 
 

@@ -31,7 +31,7 @@ $(document).ready(function() {
             dataType:'json',
             success: function(msg){
                 if(msg.code == '200'){
-                    location.href='/factory/index/';
+                    location.href='/factory/';
                 }
             },
             error: function(msg){

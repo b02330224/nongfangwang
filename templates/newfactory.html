@@ -36,7 +36,7 @@
 
                                      <input type="text" class="form-control" style="width: 89%" name="price" id="factory-price" required>
 
-                                         <select class="form-control" id="pre_unit" name="pre_unit" style="width: 10%">
+                                         <select class="form-control" id="pre_unit" name="unit" style="width: 10%">
                                              <option value="元/年">元/年</option>
                                              <option value="元/月">元/月</option>
                                          </select>
@@ -46,22 +46,22 @@
                         <div class="form-group">
 
                                 <label for="city-id">所在城市</label>
-                                <select class="form-control" id="city-id" name="city"></select>
+                                <select class="form-control" id="city-id" name="city_id"></select>
 
                         </div>
                         <div class="form-group">
                             <label for="area-id">所在区</label>
-                            <select class="form-control" id="area-id" name="area"></select>
+                            <select class="form-control" id="area-id" name="area_id"></select>
                         </div>
 
                          <div class="form-group">
                             <label for="street-id">所在街道</label>
-                            <select class="form-control" id="street-id" name="street"></select>
+                            <select class="form-control" id="street-id" name="street_id"></select>
                         </div>
 
                          <div class="form-group">
                             <label for="village-id">所在村</label>
-                            <select class="form-control" id="village-id" name="village"></select>
+                            <select class="form-control" id="village-id" name="village_id"></select>
                         </div>
 
                         <div class="form-group">
@@ -77,13 +77,13 @@
                     <div class="factory-content">
 
                         <div class="form-group">
-                            <label for="factory-acreage">厂房面积</label>
+                            <label for="factory-acreage">厂房面积(平方)</label>
                             <input type="number" class="form-control" name="acreage" id="factory-acreage" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="factory-unit">描述</label>
-                            <input type="text" class="form-control" name="unit" id="factory-unit" placeholder="如：三室两厅两卫" required>
+                            <label for="content-id">描述</label>
+                            <input type="text" class="form-control" name="content" id="content-id" placeholder="如：三室两厅两卫" required>
                         </div>
 
                          <div class="form-group">
@@ -93,7 +93,7 @@
 
                         <div class="form-group">
                             <label for="contact_person-id">联系人</label>
-                            <input type="number" class="form-control" name="contact_person" id="contact_person-id" required>
+                            <input type="text" class="form-control" name="contact_person" id="contact_person-id" required>
                         </div>
 
                          <div class="form-group">

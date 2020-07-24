@@ -173,7 +173,7 @@ class HouseImage(BaseModel, db.Model):
 ihome_factory_facility = db.Table(
     "ihome_factory_facility",
     db.Column("factory_id", db.Integer, db.ForeignKey("ihome_factory.id"), primary_key=True),  # 房屋编号
-    db.Column("facility2_id", db.Integer, db.ForeignKey("ihome_facility2.id"), primary_key=True)  # 设施编号
+    db.Column("facility_id", db.Integer, db.ForeignKey("ihome_facility.id"), primary_key=True)  # 设施编号
 )
 
 
@@ -190,24 +190,6 @@ class FactoryImage(BaseModel, db.Model):
 
 
 
-class Facility2(BaseModel, db.Model):
-    """设施信息, 房间规格等信息"""
-
-    __tablename__ = "ihome_facility2"
-
-    id = db.Column(db.Integer, primary_key=True)  # 设施编号
-    name = db.Column(db.String(32), nullable=False)  # 设施名字
-    css = db.Column(db.String(30), nullable=True)  # 设施展示的图标
-
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'css': self.css
-        }
-
-    def to_factory_dict(self):
-        return {'id': self.id}
 
 
 
@@ -240,23 +222,20 @@ class Factory(BaseModel, db.Model):
     images = db.relationship("FactoryImage")  # 房屋的图片
     index_image_url = db.Column(db.String(256), default="")  # 房屋主图片的路径
     # 房屋的设施
-    facilities = db.relationship("Facility2", secondary=ihome_factory_facility)
+    facilities = db.relationship("Facility", secondary=ihome_factory_facility)
 
     def to_dict(self):
+        print(dir(self.unit))
         return {
             'id': self.id,
             'title': self.title,
             'content': self.content,
             'image': self.index_image_url if self.index_image_url else '',
-            'village': self.village.name,
+            'village': self.village_id,
             'address': self.address,
-            'sale_type': self.sale_type,
             'acreage': self.acreage,
             'price': self.price,
-            'unit': self.unit,
-            'pay_period': self.pay_period,
-            'deposit': self.deposit,
-            'min_months': self.min_months,
+            'unit': self.unit.value,
             'room_count': self.room_count,
             'contact_person': self.contact_person,
             'contact_mobile': self.contact_mobile,

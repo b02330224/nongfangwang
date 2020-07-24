@@ -141,6 +141,52 @@ $(document).ready(function(){
             var search_html = template('search_house_script',{ohouse: data.house_info})
             $('.factory-list').append(search_html)
         }
-    })
+    });
 
-})
+     $.get('/factory/list/', function(data){
+
+        if(data.code == 200){
+            console.log('get factory lsit ok');
+            console.log(data.flist);
+             $('.register-login').hide()
+             $('.user-info').show().find('.user-name').text(data.name)
+              var factory_html = template('a_script',{flist: data.flist})
+            console.log('factory_html', factory_html)
+            $('#factory-list').append(factory_html)
+        }else{
+            $('.user-info').hide()
+            $('.register-login').show()
+        }
+
+
+    });
+
+       function adjustWidth() {
+       var parentwidth = $(".container").width();
+       $(".top-bar").width(parentwidth);
+        $(".footer").width(parentwidth);
+     }
+
+     $(window).resize(
+     function() {
+       adjustWidth();
+     });
+
+     adjustWidth();
+
+
+});
+
+ function logout() {
+         $.ajax({
+             url: '/user/logout/',
+             type: 'DELETE',
+             success: function (data) {
+                 if (data.code == '200') {
+                     $(".user-info").hide();
+                     $(".register-login").show();
+                 }
+             }
+         });
+
+     }

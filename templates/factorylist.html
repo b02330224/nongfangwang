@@ -17,6 +17,15 @@
             <div class="nav-bar">
                 <h3 class="page-title">房 源</h3>
                 <a class="nav-btn fl" href="/factory/index/"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
+                 <div class="register-login">
+                    <a class="btn top-btn btn-theme" href="/user/register/">注册</a>
+                    <a class="btn top-btn btn-theme" href="/user/login/">登录</a>
+                </div>
+                <div class="user-info ">
+                    <span><i class="fa fa-user fa-lg"></i></span>
+                    <a class="user-name" href="/user/my/"></a>
+                    <a class="btn top-btn btn-theme" href="javascript:logout();">退出</a>
+                </div>
             </div>
             <ul class="filter-title-bar">
                 <li class="filter-title">
@@ -54,32 +63,35 @@
                 </ul>
             </div>
         </div>
-        <div class="display-mask"></div>
-        <ul class="factory-list">
+        <div class="display-mask">
+
+        </div>
+          <div class="factory-list-div">
+                 <ul class="factory-list" id="factory-list">
              {% raw %}
-            <script id="search_factory_script" type="text/html">
-                {{ each factory as factorys }}
-                <li class="factory-item">
-                    <a href="/factory/detail/?factory_id={{ factory.id }}"><img alt="" src="{{ factory.image }}"></a>
+            <script id="a_script" type="text/html">
+                {{ each flist  fac i }}
+                    <li class="factory-item">
+                    <a href="/factory/detail/?factory_id={{ fac.id }}"><img alt="" src="{{ fac.image }}"></a>
                     <div class="factory-desc">
                         <div class="landlord-pic"></div>
-                        <div class="factory-price">￥<span>{{ factory.price }}</span>/晚</div>
+                        <div class="factory-price">￥<span>{{ fac.price }}</span></div>
                         <div class="factory-intro">
-                            <span class="factory-title">{{ factory.title }}</span>
-                            <em>{{ factory.address }}</em>
+                            <span class="factory-title">{{ fac.title }}</span>
+                            <em>{{ fac.address }}</em>
                         </div>
                     </div>
                 </li>
+
                 {{ /each }}
             </script>
         {% endraw %}
         </ul>
-
-
+          </div>
 
 
         <div class="footer">
-            <a href="/factory/new_factory"><input type="submit" class="btn btn-success btn-commit" value="发布房源信息"></a>
+            <a href="/factory/add"><input type="submit" class="btn btn-success btn-commit" value="发布房源信息"></a>
 
                 <div class="error-msg text-center"><i class="fa fa-exclamation-circle"></i>请将全部信息填写完整后再提交</div>
 
@@ -93,5 +105,5 @@
     <script src="/static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="/static/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
     <script src="/static/js/template.js"></script>
-    <script src="/static/js/ihome/factory_search.js"></script>
+    <script src="/static/js/ihome/factorylist.js"></script>
 {% endblock %}
