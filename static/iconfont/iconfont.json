@@ -1,0 +1,30 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "715234",
+      "name": "厂房",
+      "font_class": "changfang",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "1258744",
+      "name": "套房",
+      "font_class": "taofang",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "11156489",
+      "name": "个人中心 - 中",
+      "font_class": "gerenzhongxin-zhong",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    }
+  ]
+}

@@ -123,25 +123,25 @@ body {
     background-color: rgba(0, 0, 0, 0.7);
     display: none;
 }
-.factory-btn {
+.house-btn {
     margin-top: 130px;
 }
-.factory-list-div {
+.house-list-div {
     padding-top: 0px;
 }
 
-.factory-list {
+.house-list {
 
     padding-top: 0px;
 
 }
 
-.factory-desc {
+.house-desc {
 display: inline-block;
 
 }
 
-.factory-item-header {
+.house-item-header {
     background-color: ghostwhite;
     height: 20px;
     line-height: 20px;
@@ -153,18 +153,18 @@ display: inline-block;
 
 }
 
-.factory-item {
+.house-item {
 
     background-color: #eee;
 }
 
-.factory-item a {
+.house-item a {
     display: flex;
     justify-content: space-around;
 
 
 }
-.factory-item img{
+.house-item img{
     width: 200px;
     height: 200px;
 
@@ -180,7 +180,7 @@ display: inline-block;
 /*    overflow: hidden;*/
 /*    border: 3px solid #fff;*/
 /*}*/
-.factory-price {
+.house-price {
     display: inline-block;
 
     right: 0;
@@ -194,14 +194,14 @@ display: inline-block;
     font-size: 14px;
     margin-left: 10px;
 }
-.factory-price>span {
+.house-price>span {
     font-size: 30px;
 }
-.factory-intro {
+.house-intro {
     padding: 5px 10px;
     line-height: 20px;
 }
-.factory-title {
+.house-title {
     display: block;
     white-space: nowrap;
     overflow: hidden;
@@ -209,7 +209,7 @@ display: inline-block;
     font-size: 14px;
     color: #333;
 }
-.factory-intro>em {
+.house-intro>em {
     display: block;
     width: 100%;
     white-space: nowrap;

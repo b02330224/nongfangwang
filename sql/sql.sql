@@ -1,5 +1,5 @@
 
---  插入设备规格参数
+--插入设备规格参数
 INSERT INTO `ihome_city` (`id`, `name`) VALUES (1, '杭州市'),(2, '海宁市');
 
 -- 地区信息
@@ -9,9 +9,9 @@ INSERT INTO `ihome_area` (`id`, `name`, `city_id`) VALUES (1, '余杭区', 1),(2
 INSERT INTO `ihome_street` (`id`, `name`, `area_id`) VALUES (1, '南苑', 1),(2, '东湖', 1);
 
 
-INSERT INTO `ihome_village` (`id`, `name`, ,`other`,`street_id`) VALUES (1, '天万', '',1);
+INSERT INTO `ihome_village` (`id`, `name`,`other`,`street_id`) VALUES (1, '天万', '',1);
 -- 设施信息
-INSERT INTO `ihome_facility` VALUES (null, null, '1', '宽带网络', 'wirelessnetwork-ico')
+INSERT INTO `ihome_facility` VALUES (null, null, '1', '宽带网络', 'wirelessnetwork-ico');
 --INSERT INTO `ihome_facility` VALUES (null, null, '2', '热水淋浴', 'shower-ico');
 INSERT INTO `ihome_facility` VALUES (null, null, '3', '空调', 'aircondition-ico');
 --INSERT INTO `ihome_facility` VALUES (null, null, '4', '暖气', 'heater-ico');

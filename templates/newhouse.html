@@ -14,7 +14,7 @@
     <div class="container">
         <div class="top-bar">
             <div class="nav-bar">
-                <h3 class="page-title">发布新房源</h3>
+                <h3 class="page-title">发布新套房</h3>
                 <a class="nav-btn fl" href="/house/my_house/"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
             </div>
         </div>
@@ -30,14 +30,43 @@
                             <label for="house-title">房屋标题</label>
                             <input type="text" class="form-control" name="title" id="house-title" required>
                         </div>
+
+                         <div class="form-group">
+                            <label for="house-acreage">面积(平方)</label>
+                            <input type="number" class="form-control" name="acreage" id="house-acreage" required>
+                        </div>
+
                         <div class="form-group">
-                            <label for="house-price">每晚价格</label>
-                            <input type="number" class="form-control" name="price" id="house-price" required>
+                            <label for="house-price">价格(元/月)</label>
+                             <div class="form-inline">
+                                <input type="number" class="form-control" name="price" id="house-price" required>
+                                  <select class="form-control" id="pre_unit" name="unit" style="width: 10%">
+                                             <option value="元/年">元/年</option>
+                                             <option value="元/月">元/月</option>
+                                         </select>
+                             </div>
+                        </div>
+
+
+                        <div class="form-group">
+                                <label for="city-id">所在城市</label>
+                                <select class="form-control" id="city-id" name="city_id"></select>
                         </div>
                         <div class="form-group">
-                            <label for="area-id">所在城区</label>
+                            <label for="area-id">所在区</label>
                             <select class="form-control" id="area-id" name="area_id"></select>
                         </div>
+
+                         <div class="form-group">
+                            <label for="street-id">所在街道</label>
+                            <select class="form-control" id="street-id" name="street_id"></select>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="village-id">所在村</label>
+                            <select class="form-control" id="village-id" name="village_id"></select>
+                        </div>
+
                         <div class="form-group">
                             <label for="house-address">详细地址</label>
                             <textarea class="form-control" name="address" id="house-address" required></textarea>
@@ -53,34 +82,61 @@
                             <label for="house-room-count">出租房间数目</label>
                             <input type="number" class="form-control" name="room_count" id="house-room-count" required>
                         </div>
-                        <div class="form-group">
-                            <label for="house-acreage">房屋面积</label>
-                            <input type="number" class="form-control" name="acreage" id="house-acreage" required>
+                         <div class="form-group">
+                            <label for="cook-bath-room-id">厨卫设施</label>
+                            <select class="form-control" id="cook-bath-room-id" name="cook-bath-room">
+                             <option value="single">独立厨卫</option>
+                             <option value="share">公共厨卫</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="house-unit">户型描述</label>
-                            <input type="text" class="form-control" name="unit" id="house-unit" placeholder="如：三室两厅两卫" required>
+                            <label for="cook-bath-room-id">朝向</label>
+                            <select class="form-control" id="derection-id" name="direction">
+                                 <option value="east">东</option>
+                                 <option value="south">南</option>
+                                 <option value="west">西</option>
+                                 <option value="north">北</option>
+                            </select>
                         </div>
+
                         <div class="form-group">
-                            <label for="house-capacity">宜住人数</label>
-                            <input type="number" class="form-control" name="capacity" id="house-capacity" required>
+                            <div class="form-inline floor-span">
+                              <label for="floor-id">所处楼层</label>
+                                <select class="form-control" id="floor-id" name="floor">
+                                     <option value="1">一楼</option>
+                                     <option value="2">二楼</option>
+                                     <option value="3">三楼</option>
+                                     <option value="4">四楼</option>
+                                     <option value="5">五楼</option>
+                                     <option value="6">六楼</option>
+                                     <option value="7">七楼</option>
+
+
+                                </select>
+
+
+                                <label for="total-floor-id">共几层</label>
+                                <select class="form-control" id="total-floor-id" name="total-floor">
+                                     <option value="1">一层</option>
+                                     <option value="2">二层</option>
+                                     <option value="3">三层</option>
+                                     <option value="4">四层</option>
+                                     <option value="5">五层</option>
+                                     <option value="6">六层</option>
+                                     <option value="7">七层</option>
+
+
+                                </select>
+
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="house-beds">卧床配置</label>
-                            <input type="text" class="form-control" name="beds" id="house-beds" placeholder="如：双人床:2x1.8x1张 1.5x2x2张" required>
-                        </div> 
-                        <div class="form-group">
-                            <label for="house-deposit">押金数额</label>
-                            <input type="number" class="form-control" name="deposit" id="house-deposit" required>
+                            <label for="house-desc">详细描述</label>
+                            <input type="text" class="form-control" name="unit" id="house-desc" placeholder="如：三室两厅两卫" required>
                         </div>
-                        <div class="form-group">
-                            <label for="house-min-days">最少入住天数</label>
-                            <input type="number" class="form-control" name="min_days" id="house-min-days" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="house-max-days">最多入住天数</label>
-                            <input type="number" class="form-control" name="max_days" id="house-max-days" placeholder="0表示无限制" required>
-                        </div>
+
+
                     </div>
                 </li>
                 <li>

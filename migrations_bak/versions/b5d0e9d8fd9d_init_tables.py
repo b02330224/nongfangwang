@@ -96,7 +96,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('village_id', sa.Integer(), nullable=False),
     sa.Column('address', sa.String(length=512), nullable=True),
-    sa.Column('sale_type', sqlalchemy_utils.types.choice.ChoiceType(Factory.SALE_TYPE), nullable=True),
+    #sa.Column('sale_type', sqlalchemy_utils.types.choice.ChoiceType(Factory.SALE_TYPE), nullable=True),
     sa.Column('acreage', sa.Integer(), nullable=True),
     sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('unit', sqlalchemy_utils.types.choice.ChoiceType(Factory.UNIT_TYPE), nullable=True),

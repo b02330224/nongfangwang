@@ -37,6 +37,7 @@ class User(BaseModel, db.Model):
     id_card = db.Column(db.String(18), unique=True)  # 实名认证的身份证号码
 
     houses = db.relationship('House', backref='user')
+    factorys = db.relationship('Factory', backref='user')
     orders = db.relationship('Order', backref='user')
 
     # 读
@@ -84,36 +85,43 @@ class House(BaseModel, db.Model):
     # 房屋主人的用户编号
     user_id = db.Column(db.Integer, db.ForeignKey("ihome_user.id"), nullable=False)
     # 归属地的区域编号
-    village_id = db.Column(db.Integer, db.ForeignKey("ihome_village.id"), nullable=False)
+    # area_id = db.Column(db.Integer, db.ForeignKey("ihome_area.id"), nullable=False)
+    # city_id = db.Column(db.Integer, db.ForeignKey("ihome_city.id"), nullable=False)
+    # street_id = db.Column(db.Integer, db.ForeignKey("ihome_street.id"), nullable=False)
+    # village_id = db.Column(db.Integer, db.ForeignKey("ihome_village.id"), nullable=False)
+
+    area = db.Column(db.String(10), nullable=False)
+    city = db.Column(db.String(10), nullable=False)
+    street = db.Column(db.String(10), nullable=False)
+    village = db.Column(db.String(10), nullable=False)
+
     title = db.Column(db.String(64), nullable=False)  # 标题
     price = db.Column(db.Integer, default=0)  # 单价，单位：分
     address = db.Column(db.String(512), default="")  # 地址
     room_count = db.Column(db.Integer, default=1)  # 房间数目
     acreage = db.Column(db.Integer, default=0)  # 房屋面积
-    unit = db.Column(db.String(32), default="")  # 房屋单元， 如几室几厅
-    capacity = db.Column(db.Integer, default=1)  # 房屋容纳的人数
-    beds = db.Column(db.String(64), default="")  # 房屋床铺的配置
-    deposit = db.Column(db.Integer, default=0)  # 房屋押金
-    min_days = db.Column(db.Integer, default=1)  # 最少入住天数
-    max_days = db.Column(db.Integer, default=0)  # 最多入住天数，0表示不限制
-    order_count = db.Column(db.Integer, default=0)  # 预订完成的该房屋的订单数
+    unit = db.Column(db.String(32), default="")  # 价格单位
+    #capacity = db.Column(db.Integer, default=1)  # 房屋容纳的人数
+    direction = db.Column(db.String(64), default="")  # 房屋朝向
+    floor = db.Column(db.String(64), default="")  # 房屋楼层
     index_image_url = db.Column(db.String(256), default="")  # 房屋主图片的路径
-
+    desc = db.Column(db.String(256), default="")  # 房屋详细描述
+    have_cook_bath = db.Column(db.Boolean(), default=True)
     # 房屋的设施
     facilities = db.relationship("Facility", secondary=ihome_house_facility)
     images = db.relationship("HouseImage")  # 房屋的图片
-    orders = db.relationship('Order', backref='house')
+    #orders = db.relationship('Order', backref='house')
 
     def to_dict(self):
         return {
             'id': self.id,
             'title': self.title,
             'image': self.index_image_url if self.index_image_url else '',
-            'area': self.area.name,
+            #'area': self.area.name,
             'price': self.price,
             'create_time': self.create_time.strftime('%Y-%m-%d %H:%M:%S'),
             'room': self.room_count,
-            'order_count': self.order_count,
+            #'order_count': self.order_count,
             'address': self.address
         }
 
@@ -124,16 +132,17 @@ class House(BaseModel, db.Model):
             'user_name': self.user.name,
             'title': self.title,
             'price': self.price,
-            'address': self.area.name + self.address,
+            #'address': self.area.name + self.address,
+            'address': self.address,
             'room_count': self.room_count,
             'acreage': self.acreage,
             'unit': self.unit,
-            'capacity': self.capacity,
-            'beds': self.beds,
-            'deposit': self.deposit,
-            'min_days': self.min_days,
-            'max_days': self.max_days,
-            'order_count': self.order_count,
+            #'capacity': self.capacity,
+            #'beds': self.beds,
+            #'deposit': self.deposit,
+            #'min_days': self.min_days,
+            #'max_days': self.max_days,
+            #'order_count': self.order_count,
             'images': [image.url for image in self.images],
             'facilities': [facility.to_dict() for facility in self.facilities],
         }
@@ -246,6 +255,24 @@ class Factory(BaseModel, db.Model):
 
         }
 
+    def to_full_dict(self):
+        return {
+            'id': self.id,
+            'user_avatar': self.user.avatar if self.user.avatar else '',
+            'user_name': self.user.name,
+            'contact_person': self.contact_person,
+            'contact_mobile': self.contact_mobile,
+            'title': self.title,
+            'price': self.price,
+            # 'address': self.area.name + self.address,
+            'address': self.address,
+            'room_count': self.room_count,
+            'acreage': self.acreage,
+            'unit': self.unit.value,
+            'images': [image.url for image in self.images],
+            'facilities': [facility.to_dict() for facility in self.facilities],
+        }
+
 
 class City(BaseModel, db.Model):
     """城区"""
@@ -305,7 +332,7 @@ class Village(BaseModel, db.Model):
     id = db.Column(db.Integer, primary_key=True)  # 村编号
     name = db.Column(db.String(32), nullable=False)  # 村名字
     other = db.Column(db.String(100), nullable=True)
-    houses = db.relationship("House", backref="village")  # 村下的房子
+    #houses = db.relationship("House", backref="village")  # 村下的房子
     street_id = db.Column(db.Integer, db.ForeignKey("ihome_street.id"), nullable=False)
 
     def to_dict(self):

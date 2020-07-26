@@ -8,7 +8,7 @@
 {% block extCss %}
     {{ super() }}
 <!--    <link href="/static/css/ihome/search.css" rel="stylesheet">-->
- <link href="/static/css/ihome/factorylist.css" rel="stylesheet">
+ <link href="/static/css/ihome/houselist.css" rel="stylesheet">
     <link href="/static/iconfont/iconfont.css" rel="stylesheet">
 {% endblock %}
 
@@ -17,7 +17,7 @@
         <div class="top-bar">
             <div class="nav-bar">
                 <h3 class="page-title">房 源</h3>
-                <a class="nav-btn fl" href="/factory/index/"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
+                <a class="nav-btn fl" href="/house/index/"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
                  <div class="register-login">
                     <a class="btn top-btn btn-theme" href="/user/register/">注册</a>
                     <a class="btn top-btn btn-theme" href="/user/login/">登录</a>
@@ -67,24 +67,24 @@
         <div class="display-mask">
 
         </div>
-        <div class="factory-btn">  <a href="/factory/add"><input type="submit" class="btn btn-success btn-commit " value="发布房源信息"></a></div>
-          <div class="factory-list-div">
-                 <ul class="factory-list" id="factory-list">
+        <div class="house-btn">  <a href="/house/add"><input type="submit" class="btn btn-success btn-commit " value="发布房源信息"></a></div>
+          <div class="house-list-div">
+                 <ul class="house-list" id="house-list">
              {% raw %}
             <script id="a_script" type="text/html">
-                {{ each flist  fac i }}
-                    <li class="factory-item">
-                        <div class="factory-item-header">{{ fac.title }}</div>
-                        <div class="factory-item-content">
-                             <a href="/factory/detail/?factory_id={{ fac.id }}">
-                                 <img alt="" src="{{ fac.image }}">
-                                 <div class="factory-desc">
+                {{ each hlist  hou i }}
+                    <li class="house-item">
+                        <div class="house-item-header">{{ hou.title }}</div>
+                        <div class="house-item-content">
+                             <a href="/house/detail/?house_id={{ hou.id }}">
+                                 <img alt="" src="{{ hou.image }}">
+                                 <div class="house-desc">
                                     <div class="landlord-pic"></div>
-                                    <div class="factory-price">￥<span>{{ fac.price }}</span></div>
-                                    <div class="factory-intro">
-                                        <span class="factory-title">{{ fac.title }}</span>
-                                        <span class="factory-title">面积:{{ fac.acreage }}平方</span>
-                                        <em>地址:{{ fac.address }}</em>
+                                    <div class="house-price">￥<span>{{ hou.price }}</span></div>
+                                    <div class="house-intro">
+                                        <span class="house-title">{{ hou.title }}</span>
+                                        <span class="house-title">面积:{{ hou.acreage }}平方</span>
+                                        <em>地址:{{ hou.address }}</em>
                                     </div>
                                 </div>
                              </a>
@@ -103,7 +103,7 @@
 
 
         <div class="footer">
-{#            <a href="/factory/add"><input type="submit" class="btn btn-success btn-commit " value="发布房源信息"><i class="iconfont icon-changfang"></i></a>#}
+{#            <a href="/house/add"><input type="submit" class="btn btn-success btn-commit " value="发布房源信息"><i class="iconfont icon-changfang"></i></a>#}
             <a href=""><span><i class="iconfont icon-changfang"></i></span><span>厂房</span></a>
              <a href="/house/"><span><i class="iconfont icon-taofang"></i></span><span>套房</span></a>
              <a href="/user/my/"><span><i class="iconfont icon-gerenzhongxin-zhong"></i></span><span>个人中心</span></a>
@@ -119,5 +119,5 @@
     <script src="/static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="/static/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
     <script src="/static/js/template.js"></script>
-    <script src="/static/js/ihome/factorylist.js"></script>
+    <script src="/static/js/ihome/houselist.js"></script>
 {% endblock %}

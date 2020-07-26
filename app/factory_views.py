@@ -190,3 +190,26 @@ def facility():
     facility_dict_list = [facility.to_dict() for facility in facility_list]
     # 构造结果并返回
     return jsonify(facility=facility_dict_list)
+
+
+
+@factory_blueprint.route('/detail/')
+def detail():
+    return render_template('factory_detail.html')
+
+
+@factory_blueprint.route('/detail/<int:id>/')
+def factory_detail(id):
+    # 查询房屋信息
+    factory = Factory.query.get(id)
+    # 查询设施信息
+    facility_list = factory.facilities
+    facility_dict_list = [facility.to_dict() for facility in facility_list]
+    # 判断当前房屋信息是否为当前登录的用户发布，如果是则不显示预订按钮
+    booking = 1
+    if 'user_id' in session:
+        if factory.user_id == session['user_id']:
+            booking = 0
+
+    return jsonify(factory=factory.to_full_dict(), facility_list=facility_dict_list, booking=booking)
+

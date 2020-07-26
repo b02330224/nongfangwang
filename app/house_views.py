@@ -52,7 +52,7 @@ def area_facility():
     return jsonify(area=area_dict_list, facility=facility_dict_list)
 
 
-@house_blueprint.route('/new_house/', methods=['GET', 'POST'])
+@house_blueprint.route('/add/', methods=['GET', 'POST'])
 def new_house():
     if request.method == 'GET':
         return render_template('newhouse.html')
@@ -142,7 +142,7 @@ def house_detail(id):
 @house_blueprint.route('/')
 def house():
     print('house index')
-    return render_template('index.html')
+    return render_template('houselist.html')
 
 
 '''
@@ -150,7 +150,7 @@ def house():
 '''
 
 
-@house_blueprint.route('/hindex/', methods=['GET'])
+@house_blueprint.route('/list/', methods=['GET'])
 def index():
     # 返回最新的5个房屋信息
     hlist = House.query.order_by(House.id.desc()).all()[:5]

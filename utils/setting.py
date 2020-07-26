@@ -22,13 +22,13 @@ MYSQL_DATABASES = {
     'DH': 'pymysql',
     'ROOT': 'root',
     'PASSWORD': '123456',
-    'HOST': '192.168.6.125',
+    'HOST': '192.168.184.202',
     'PORT': '3306',
     'NAME': 'nfw'
 }
 
 # 会话缓存配置
 REDIS_DATABASES = {
-    'HOST': '192.168.6.125',
+    'HOST': '192.168.184.202',
     'PORT': '6379'
 }
