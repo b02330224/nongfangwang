@@ -24,3 +24,4 @@ yarn-error.log*
 *.pyc
 *.sln
 *.sw?
+debug_setting.py

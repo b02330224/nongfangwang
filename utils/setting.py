@@ -32,3 +32,8 @@ REDIS_DATABASES = {
     'HOST': '192.168.184.202',
     'PORT': '6379'
 }
+
+try:
+    from debug_setting import *
+except Exception as e:
+    print(e)

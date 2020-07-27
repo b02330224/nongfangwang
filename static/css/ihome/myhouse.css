@@ -63,14 +63,22 @@ body {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     padding: 10px;
+    display: flex;
+    align-items: center;
 }
-.house-content>img {
+
+.house-content a {
+    width: 100%;
+}
+.house-content img {
     width: 30%;
+    min-width: 305px;
     vertical-align: top;
 }
+
 .house-text {
     display: inline-block;
-    width: 63%;
+    width: 50%;
     margin-left: 10px;
 }
 .house-text>h3 {
@@ -85,6 +93,25 @@ body {
     line-height: 25px;
     color: #666;
 }
+
+.house-operation {
+    display: inline-block;
+    width: 10%;
+    margin-left: 10px;
+
+}
 .auth-warn {
     display: none;
+}
+
+.house-desc {
+    margin: 0 auto;
+    vertical-align: bottom;
+
+}
+
+.house-desc li {
+    list-style: none;
+    display: block;
+    height: 30%;
 }

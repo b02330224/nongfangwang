@@ -21,6 +21,7 @@
         <div class="houses-con">
         <ul class="houses-list">
             <form id="form-house-info">
+                <input type="hidden" name="id" value="{{id}}">
                 <li>
                     <div class="house-title">
                         <h3>基本信息</h3>
@@ -50,21 +51,21 @@
 
                         <div class="form-group">
                                 <label for="city-id">所在城市</label>
-                                <select class="form-control" id="city-id" name="city_id"></select>
+                                <select class="form-control" id="city-id" name="city"></select>
                         </div>
                         <div class="form-group">
                             <label for="area-id">所在区</label>
-                            <select class="form-control" id="area-id" name="area_id"></select>
+                            <select class="form-control" id="area-id" name="area"></select>
                         </div>
 
                          <div class="form-group">
                             <label for="street-id">所在街道</label>
-                            <select class="form-control" id="street-id" name="street_id"></select>
+                            <select class="form-control" id="street-id" name="street"></select>
                         </div>
 
                          <div class="form-group">
                             <label for="village-id">所在村</label>
-                            <select class="form-control" id="village-id" name="village_id"></select>
+                            <select class="form-control" id="village-id" name="village"></select>
                         </div>
 
                         <div class="form-group">
@@ -90,8 +91,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="cook-bath-room-id">朝向</label>
-                            <select class="form-control" id="derection-id" name="direction">
+                            <label for="direction-id">朝向</label>
+                            <select class="form-control" id="direction-id" name="direction">
                                  <option value="east">东</option>
                                  <option value="south">南</option>
                                  <option value="west">西</option>
@@ -133,7 +134,7 @@
 
                         <div class="form-group">
                             <label for="house-desc">详细描述</label>
-                            <input type="text" class="form-control" name="unit" id="house-desc" placeholder="如：三室两厅两卫" required>
+                            <input type="text" class="form-control" name="desc" id="house-desc" placeholder="如：三室两厅两卫" required>
                         </div>
 
 

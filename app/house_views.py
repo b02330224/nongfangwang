@@ -11,6 +11,7 @@ from flask import Blueprint, render_template, request, session, jsonify
 from app.models import User, House, Facility, Area, HouseImage, Order
 from utils import status_code
 from utils.config import Config
+from utils.funtions import is_login
 
 house_blueprint = Blueprint('house', __name__)
 
@@ -53,6 +54,7 @@ def area_facility():
 
 
 @house_blueprint.route('/add/', methods=['GET', 'POST'])
+@is_login
 def new_house():
     if request.method == 'GET':
         return render_template('newhouse.html')
@@ -65,18 +67,22 @@ def new_house():
         # 创建用户信息
         house = House()
         house.user_id = session['user_id']
-        house.area_id = params.get('area_id')
         house.title = params.get('title')
-        house.price = params.get('price')
+        house.city = params.get('city')
+        house.area = params.get('area')
+        house.street = params.get('street')
+        house.village = params.get('village')
         house.address = params.get('address')
+        house.price = params.get('price')
         house.room_count = params.get('room_count')
         house.acreage = params.get('acreage')
-        house.beds = params.get('beds')
         house.unit = params.get('unit')
-        house.capacity = params.get('capacity')
-        house.deposit = params.get('deposit')
-        house.min_days = params.get('min_days')
-        house.max_days = params.get('max_days')
+        house.direction = params.get('direction')
+        total_floor = params.get('total-floor')
+        house.floor = params.get('floor') + '/' + total_floor
+        house.desc = params.get('desc')
+        house.have_cook_bath = True if params.get('cook-bath-room')== 'single' else False
+
         # 根据设施的编号查询设施对象
         if facility_ids:
             facility_list = Facility.query.filter(Facility.id.in_(facility_ids)).all()
@@ -84,6 +90,47 @@ def new_house():
         house.add_update()
         # 返回结果
         return jsonify(code='200', house_id=house.id)
+
+
+
+@house_blueprint.route('/edit/<int:id>', methods=['GET', 'POST'])
+@is_login
+def edit_house(id):
+    if request.method == 'GET':
+        return render_template('newhouse.html',id=id)
+
+    if request.method == 'POST':
+        # 接收用户信息
+        params = request.form.to_dict()
+        facility_ids = request.form.getlist('facility')
+
+        # 创建用户信息
+        house = House.query.get(id)
+        house.user_id = session['user_id']
+        house.title = params.get('title')
+        house.city = params.get('city')
+        house.area = params.get('area')
+        house.street = params.get('street')
+        house.village = params.get('village')
+        house.address = params.get('address')
+        house.price = params.get('price')
+        house.room_count = params.get('room_count')
+        house.acreage = params.get('acreage')
+        house.unit = params.get('unit')
+        house.direction = params.get('direction')
+        total_floor = params.get('total-floor')
+        house.floor = params.get('floor') + '/' + total_floor
+        house.desc = params.get('desc')
+        house.have_cook_bath = True if params.get('cook-bath-room') == 'single' else False
+
+        # 根据设施的编号查询设施对象
+        if facility_ids:
+            facility_list = Facility.query.filter(Facility.id.in_(facility_ids)).all()
+            house.facilities = facility_list
+        house.add_update()
+        # 返回结果
+        return jsonify(code='200', house_id=house.id)
+
 
 
 @house_blueprint.route('/image_house/', methods=['POST'])

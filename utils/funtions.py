@@ -29,10 +29,10 @@ def init_ext(app):
 '''
 def is_login(view_fun):
     @functools.wraps(view_fun)
-    def decorator():
+    def decorator(*args, **kwargs):
         try:
             if 'user_id' in session:
-                return view_fun()
+                return view_fun(*args, **kwargs)
             else:
                 print("session not found user_id")
                 return redirect('/user/login/')
