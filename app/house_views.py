@@ -132,6 +132,14 @@ def edit_house(id):
         return jsonify(code='200', house_id=house.id)
 
 
+@house_blueprint.route('/delete/<int:id>', methods=['GET'])
+@is_login
+def delete_house(id):
+    house = House.query.get(id)
+    house.delete()
+    return jsonify(code='200')
+
+
 
 @house_blueprint.route('/image_house/', methods=['POST'])
 def image_house():

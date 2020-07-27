@@ -10,3 +10,18 @@ $.get('/house/my_auth/',function (data) {
         $('#auth-warn').show();
     }
 });
+
+function delConfirm(url) {
+     $('#url').val(url);//给会话中的隐藏属性URL赋值
+  $('#delcfmModel').modal();
+}
+
+function urlSubmit(){
+   var url=$.trim($("#url").val());//获取会话中的隐藏属性URL
+   console.log(url)
+    $.get(url, function (data) {
+        if (data.code==200){
+            window.location.href = '/house/my_house'
+        }
+    })
+}
