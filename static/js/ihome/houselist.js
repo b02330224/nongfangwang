@@ -62,6 +62,47 @@ function updateHouseData(action) {
     })
 }
 
+ function getCitys() {
+         $.get('/factory/citys/',function (data) {
+        //城市
+        var city_html = '<option value="0">请选择</option>'
+        for(var i=0; i<data.clist.length; i++){
+            city_html += '<option value="' + data.clist[i].name+ '">' + data.clist[i].name + '</option>'
+        }
+        $('#city-id').html(city_html);
+
+    });
+    }
+
+    function getAreas(){
+         $.ajaxSettings.async = false;
+         $.get('/factory/areas/?city='+$("#city-id").find("option:selected").text(), function(data){
+            var area_html = '<option value="0">请选择</option>'
+            for(var i=0; i<data.alist.length; i++){
+                area_html += '<option value="' + data.alist[i].name + '">' + data.alist[i].name + '</option>'
+            }
+             $('#area-id').html(area_html)
+
+              });
+
+          $.ajaxSettings.async = true;
+    }
+
+function getStreets() {
+         $.ajaxSettings.async = false;
+         $.get('/factory/streets/?area='+$("#area-id").find("option:selected").text(), function(data){
+            var street_html = '<option value="0">请选择</option>'
+            for(var i=0; i<data.slist.length; i++){
+            street_html += '<option value="' + data.slist[i].name + '">' + data.slist[i].name + '</option>'
+        }
+         $('#street-id').html(street_html)
+
+          });
+
+          $.ajaxSettings.async = true;
+    }
+
+
 $(document).ready(function(){
     var queryData = decodeQuery();
     var startDate = queryData["sd"];
@@ -160,6 +201,17 @@ $(document).ready(function(){
 
 
     });
+
+
+      getCitys()
+      $('#city-id').change(function () {
+            getAreas()
+
+      });
+
+      $('#area-id').change(function () {
+       getStreets()
+      });
 
        function adjustWidth() {
        var parentwidth = $(".container").width();

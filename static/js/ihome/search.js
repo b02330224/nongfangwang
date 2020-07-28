@@ -57,6 +57,16 @@ function updateHouseData(action) {
             if(data.code == '200'){
                 var search_html = template('search_house_script',{ohouse: data.house_info})
                 $('.house-list').html(search_html)
+
+                 if (action =='new') {
+                    // 刷新
+                    $('.house-list').html(search_html);
+                 } else {
+                    //下拉
+                    cur_page=next_page;
+                    $('.house-list').append(search_html);
+                }
+
             }
         }
     })
