@@ -1,6 +1,6 @@
 body,h1,h2,h3,h4,h5,h6,p,dl,dd,select,form,ul,ol,input,textarea,header{margin:0;padding:0}
 
-body{font-family:'Microsoft Yahei';font-size:12px;background-color:#efefef}
+body{font-family:'Microsoft Yahei';font-size:12px;background-color:#efefef;min-width: 320px;max-width: 640px; margin: 0 auto;}
 
 ul,ol{list-style:none;}
 

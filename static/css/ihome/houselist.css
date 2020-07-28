@@ -1,8 +1,10 @@
 body {
     background-color: #fff;
+    margin: 0 auto;
 }
 .container {
     padding: 0px;
+    width: 100%
 }
 .top-bar {
     position: fixed;
