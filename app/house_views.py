@@ -122,6 +122,9 @@ def edit_house(id):
         house.floor = params.get('floor') + '/' + total_floor
         house.desc = params.get('desc')
         house.have_cook_bath = True if params.get('cook-bath-room') == 'single' else False
+        image_urls = []
+        if len(house.images) > 0:
+            image_urls = [image.to_dict() for image in house.images]
 
         # 根据设施的编号查询设施对象
         if facility_ids:
@@ -129,7 +132,7 @@ def edit_house(id):
             house.facilities = facility_list
         house.add_update()
         # 返回结果
-        return jsonify(code='200', house_id=house.id)
+        return jsonify(code='200', house_id=house.id, house_images=image_urls)
 
 
 @house_blueprint.route('/delete/<int:id>', methods=['GET'])
@@ -164,7 +167,15 @@ def image_house():
             house.index_image_url = os.path.join('/static/upload/house', f1.filename)
             house.add_update()
         # 返回图片信息
-        return jsonify(code='200', url=os.path.join('/static/upload/house', f1.filename))
+        return jsonify(code='200', id=image.id, url=os.path.join('/static/upload/house', f1.filename))
+
+
+
+@house_blueprint.route('/images/<int:id>', methods=['DELETE'])
+def del_house_image(id):
+    img = HouseImage.query.get(id)
+    img.delete()
+    return jsonify(code='200',msg='删除成功')
 
 
 @house_blueprint.route('/detail/')

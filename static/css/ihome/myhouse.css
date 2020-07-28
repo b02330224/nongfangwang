@@ -67,18 +67,23 @@ body {
     align-items: center;
 }
 
-.house-content a {
-    width: 100%;
+.house-content div {
+    box-sizing: border-box;
+}
+.house-image {
+     width: 50%;
+    display: inline-block;
 }
 .house-content img {
-    width: 30%;
-    min-width: 305px;
-    vertical-align: top;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .house-text {
     display: inline-block;
-    width: 50%;
+    width: 40%;
     margin-left: 10px;
 }
 .house-text>h3 {

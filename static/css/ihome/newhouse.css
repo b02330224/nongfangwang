@@ -64,11 +64,21 @@ body {
     border-bottom-right-radius: 5px;
     padding: 10px;
 }
-.house-image-cons>img {
+.image_btn_cons {
+     position: relative;
+}
+.image_btn_cons>img {
     width: 100%;
     vertical-align: top;
     margin-bottom: 10px;
+
 }
+.image_btn_cons .del_img {
+    position: absolute;
+    top: 50%;
+    right: 0px
+}
+
 .house-facility-list>li {
     float: left;
     width: 50%;

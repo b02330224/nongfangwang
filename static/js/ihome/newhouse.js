@@ -3,6 +3,36 @@ function getCookie(name) {
     return r ? r[1] : undefined;
 }
 
+function del_img(id,that) {
+     $.ajax({
+            url:'/house/images/'+id,
+            type:'delete',
+            success:function (data) {
+                if(data.code== '200'){
+                     console.log($(that).parent());
+                    $(that).parent().remove();
+                    if ($(".image_btn_cons").length <= 3) {
+                        $('.upload-msg').hide()
+                    }
+
+                }else{
+                    $('.error_msg2').html('<i class="fa fa-exclamation-circle"></i>' +data.msg);
+                    $('.error_msg2').show();
+                }
+            }
+        });
+}
+
+
+function sel_img() {
+    if ($(".image_btn_cons").length >= 3) {
+        console.log($(".image_btn_cons").length);
+
+        $('.upload-msg').show().find('span').html('上传图片超过3张了！');
+        return false
+    }
+}
+
 $(document).ready(function(){
     //查询地区、设施信息
 
@@ -137,13 +167,17 @@ $(document).ready(function(){
     //为图片表单绑定事件
     $('#form-house-image').submit(function (e) {
         e.preventDefault();
+        if ($(".image_btn_cons").length >= 3) {
+            console.log('image length=', $(".image_btn_cons").length);
+            return false
+        }
         $(this).ajaxSubmit({
             url: "/house/image_house/",
             type: "post",
             dataType: "json",
             success: function (data) {
                 if (data.code == '200') {
-                    $('.house-image-cons').append('<img src="'+data.url+'"/>');
+                    $('.house-image-cons').append('<div class="image_btn_cons"><img src="'+data.url+'"/><button type="button" class="del_img btn btn-danger" onclick="del_img('+ data.id +',this)">删除</button></div>');
                 }
             }
         });
@@ -162,6 +196,10 @@ $(document).ready(function(){
                 $('#form-house-info').hide();
                 $('#form-house-image').show();
                 $('#house-id').val(data.house_id);
+                for(image of data.house_images) {
+                    $('.house-image-cons').append('<div class="image_btn_cons"><img src="'+image.url+'"/><button type="button" class="del_img btn btn-danger" onclick="del_img('+ image.id + ',this)">删除</button></div>');
+                }
+
             }else{
                 $('.error-msg text-center').show().find('span').html(ret_map[data.code]);
             }

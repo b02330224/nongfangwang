@@ -191,6 +191,13 @@ class HouseImage(BaseModel, db.Model):
     house_id = db.Column(db.Integer, db.ForeignKey("ihome_house.id"), nullable=False)
     url = db.Column(db.String(256), nullable=False)  # 图片的路径
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'house_id': self.house_id,
+            'url': self.url
+        }
+
 
 ihome_factory_facility = db.Table(
     "ihome_factory_facility",
