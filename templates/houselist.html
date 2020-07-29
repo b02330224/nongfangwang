@@ -10,6 +10,7 @@
 <!--    <link href="/static/css/ihome/search.css" rel="stylesheet">-->
  <link href="/static/css/ihome/houselist.css" rel="stylesheet">
     <link href="/static/iconfont/iconfont.css" rel="stylesheet">
+ <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -30,7 +31,7 @@
             </div>
             <ul class="filter-title-bar">
                 <li class="filter-title">
-                    <span>入住日期</span>
+                    <span>日期范围</span>
                     <span><i class="fa fa-angle-down"></i></span>
                     <span class="split-line fr">|</span>
                 </li>
@@ -40,7 +41,7 @@
                     <span class="split-line fr">|</span>
                 </li>
                 <li class="filter-title">
-                    <span>最新上线</span>
+                    <span>面积价格</span>
                     <span><i class="fa fa-angle-down"></i></span>
                 </li>
             </ul>
@@ -53,7 +54,7 @@
                     </div>
                 </div>
                 <ul class="filter-item filter-area">
-                    <div class="form-group">
+                       <div class="form-group">
                                 <label for="city-id">所在城市</label>
                                 <select class="form-control" id="city-id" name="city"></select>
                         </div>
@@ -70,7 +71,9 @@
                 </ul>
                 <ul class="filter-item filter-sort">
                     <li class="active" sort-key="new">最新上线</li>
-                    <li sort-key="booking">入住最多</li>
+<!--                    <li sort-key="booking">入住最多</li>-->
+                    <li sort-key="acreage-inc">面积 低-高</li>
+                    <li sort-key="acreage-des">面积 高-低</li>
                     <li sort-key="price-inc">价格 低-高</li>
                     <li sort-key="price-des">价格 高-低</li>
                 </ul>

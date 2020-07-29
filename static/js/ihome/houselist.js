@@ -22,7 +22,7 @@ function updateFilterDateDisplay() {
         var text = startDate.substr(5) + "/" + endDate.substr(5);
         $filterDateTitle.html(text);
     } else {
-        $filterDateTitle.html("入住日期");
+        $filterDateTitle.html("日期范围");
     }
 }
 
@@ -32,15 +32,20 @@ function updateFilterDateDisplay() {
 // 默认采用追加方式
 // action=renew 代表页面数据清空从新展示
 function updateHouseData(action) {
-    var areaId = $(".filter-area>li.active").attr("area-id");
-    if (undefined == areaId){
-        areaId = location.search.split('&')[0].split('=')[1]
-    };
+    // var areaId = $(".filter-area>li.active").attr("area");
+    // if (undefined == areaId){
+    //     areaId = location.search.split('&')[0].split('=')[1]
+    // };
+    var city = $("#city-id").val()
+    var area = $("#area-id").val()
+    var street = $("#street-id").val()
     var startDate = $("#start-date").val();
     var endDate = $("#end-date").val();
     var sortKey = $(".filter-sort>li.active").attr("sort-key");
     var params = {
-        aid:areaId,
+        city:city,
+        area:area,
+        street:street,
         sd:startDate,
         ed:endDate,
         sk:sortKey,
@@ -49,14 +54,23 @@ function updateHouseData(action) {
     //发起ajax请求，获取数据，并显示在模板中
     console.log(params)
     $.ajax({
-        url:'/house/my_search/',
+        url:'/house/list/',
         type:'GET',
         data:params,
         dataType:'json',
         success:function(data){
             if(data.code == '200'){
-                var search_html = template('search_house_script',{ohouse: data.house_info})
-                $('.house-list').html(search_html)
+                var search_html = template('a_script',{hlist: data.hlist})
+
+                 if (action =='renew') {
+                    // 刷新
+                    $('.house-list').html(search_html);
+                 } else {
+                    //下拉
+                    cur_page=next_page;
+                    $('.house-list').append(search_html);
+                }
+
             }
         }
     })
@@ -65,7 +79,7 @@ function updateHouseData(action) {
  function getCitys() {
          $.get('/factory/citys/',function (data) {
         //城市
-        var city_html = '<option value="0">请选择</option>'
+        var city_html = '<option value="">请选择</option>'
         for(var i=0; i<data.clist.length; i++){
             city_html += '<option value="' + data.clist[i].name+ '">' + data.clist[i].name + '</option>'
         }
@@ -77,7 +91,7 @@ function updateHouseData(action) {
     function getAreas(){
          $.ajaxSettings.async = false;
          $.get('/factory/areas/?city='+$("#city-id").find("option:selected").text(), function(data){
-            var area_html = '<option value="0">请选择</option>'
+            var area_html = '<option value="">请选择</option>'
             for(var i=0; i<data.alist.length; i++){
                 area_html += '<option value="' + data.alist[i].name + '">' + data.alist[i].name + '</option>'
             }
@@ -91,7 +105,7 @@ function updateHouseData(action) {
 function getStreets() {
          $.ajaxSettings.async = false;
          $.get('/factory/streets/?area='+$("#area-id").find("option:selected").text(), function(data){
-            var street_html = '<option value="0">请选择</option>'
+            var street_html = '<option value="">请选择</option>'
             for(var i=0; i<data.slist.length; i++){
             street_html += '<option value="' + data.slist[i].name + '">' + data.slist[i].name + '</option>'
         }
@@ -117,12 +131,30 @@ $(document).ready(function(){
 
     // 获取筛选条件中的城市区域信息
 
-    $(".input-daterange").datepicker({
+    // $(".input-daterange input").datepicker({
+    //     format: "yyyy-mm-dd",
+    //     startDate: "today",
+    //     language: "zh-CN",
+    //     autoclose: true,
+    //     orientation: "bottom right"
+    // });
+
+     $("#start-date").datepicker({
         format: "yyyy-mm-dd",
-        startDate: "today",
+        startDate: "2020-07-01",
         language: "zh-CN",
-        autoclose: true
+        autoclose: true,
+        orientation: "bottom right"
     });
+
+     $("#end-date").datepicker({
+        format: "yyyy-mm-dd",
+        startDate: "2020-07-01",
+        language: "zh-CN",
+        autoclose: true,
+        orientation: "bottom right"
+    });
+
     var $filterItem = $(".filter-item-bar>.filter-item");
     $(".filter-title-bar").on("click", ".filter-title", function(e){
         var index = $(this).index();
@@ -177,6 +209,7 @@ $(document).ready(function(){
     })
 
     var search_path = location.search
+    console.log('search_path', search_path)
     $.get('/house/my_search/' + search_path, function(data){
         if(data.code == '200'){
             var search_html = template('search_house_script',{ohouse: data.house_info})

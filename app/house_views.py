@@ -219,11 +219,38 @@ def house():
 @house_blueprint.route('/list/', methods=['GET'])
 def index():
     # 返回最新的5个房屋信息
-    city = request.args.get('city')
-    area = request.args.get('area')
-    street = request.args.get('street')
-    hlist = House.query.filter_by(city=city, area=area, street=street).order_by(House.id.desc()).all()[:10]
+    city = request.args.get('city','')
+    area = request.args.get('area','')
+    street = request.args.get('street','')
+    sd = request.args.get('sd', '')
+    ed = request.args.get('ed', '')
+    sk = request.args.get('sk', '')
+    from sqlalchemy import and_
+    cond = and_(House.city.like('%'+city+'%'), House.area.like('%'+area+'%'),  House.street.like('%'+street+'%'))
+    date_cond = and_(House.update_time >= sd, House.update_time <= ed)
+    #hlist = House.query.filter_by(city=city, area=area, street=street).order_by(House.id.desc()).all()[:10]
+
+    #hlist = House.query.filter(cond).filter(date_cond).order_by(House.id.desc()).all()[:10]
+
+    hlist = House.query.filter(cond)
+    if sd:
+        hlist = hlist.filter(date_cond)
+    print("===========")
+
+    #排序
+    if sk == 'new' or sk == '':
+        hlist = hlist.order_by(House.id.desc())
+    elif sk == 'acreage-inc':
+        hlist = hlist.order_by(House.acreage)
+    elif sk == 'acreage-des':
+        hlist = hlist.order_by(House.acreage.desc())
+    elif sk == 'price-inc':
+        hlist = hlist.order_by(House.price)
+    elif sk == 'price-des':
+        hlist = hlist.order_by(House.price.desc())
+
     #hlist = House.query.order_by(House.id.desc()).all()[:10]
+    hlist = hlist[:10]
     hlist2 = [house.to_dict() for house in hlist]
     # 查找地区信息
     area_list = Area.query.all()
