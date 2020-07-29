@@ -1,9 +1,17 @@
 body {
     background-color: #eee;
+    margin: 0 auto;
 }
 .container {
     padding: 0px;
+    /*min-width: 360px;*/
+    width: 100%;
 }
+/*.top-wrap {*/
+/*    height: 35px;*/
+/*    background-color: pink;*/
+/*    overflow: hidden;*/
+/*}*/
 .top-bar {
     position: fixed;
     width: 100%;
@@ -35,7 +43,7 @@ body {
     margin-top: 38px;
 }
 .menus-list {
-    padding: 10px;
+    padding: 10px 0px 10px 0px;
 }
 .menus-list>li {
     font-size: 16px;

@@ -25,3 +25,18 @@ function urlSubmit(){
         }
     })
 }
+
+$(document).ready(function() {
+    function adjustWidth() {
+        var parentwidth = $(".container").width();
+        $(".top-bar").width(parentwidth);
+        $(".footer").width(parentwidth);
+    }
+
+    $(window).resize(
+        function () {
+            adjustWidth();
+        });
+
+    adjustWidth();
+})

@@ -220,5 +220,18 @@ $(document).ready(function(){
         return false;
     });
 
+    function adjustWidth() {
+        var parentwidth = $(".container").width();
+        $(".top-bar").width(parentwidth);
+        $(".footer").width(parentwidth);
+    }
+
+    $(window).resize(
+        function () {
+            adjustWidth();
+        });
+
+    adjustWidth();
+
 
 })

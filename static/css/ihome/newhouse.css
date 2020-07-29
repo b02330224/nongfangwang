@@ -1,8 +1,10 @@
 body {
     background-color: #eee;
+    margin:0 auto;
 }
 .container {
     padding: 0px;
+    width: 100%;
 }
 .top-bar {
     position: fixed;
@@ -35,7 +37,7 @@ body {
     margin-top: 38px;
 }
 .houses-list {
-    padding: 10px;
+     padding: 10px 0px 10px 0px;
 }
 .houses-list>form>li {
     font-size: 14px;
