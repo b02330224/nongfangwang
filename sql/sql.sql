@@ -45,3 +45,10 @@ INSERT INTO `ihome_house_image` VALUES ('2020-07-27 10:41:25','2020-07-27 10:41:
 INSERT INTO `ihome_street` VALUES (NULL,NULL,1,'南苑',1),(NULL,NULL,2,'东湖',1);
 INSERT INTO `ihome_user` VALUES ('2020-07-27 10:40:10','2020-07-27 10:45:21',1,'13003196483','pbkdf2:sha256:150000$HITLXGSe$395f2e0040c3d3d7a866d0663f872055be448a2b65e479341aaa886d9b021b56','13003196483',NULL,'王建','330184198303110035');
 INSERT INTO `ihome_village` VALUES (NULL,NULL,1,'天万','',1);
+
+INSERT INTO `ihome_house` VALUES ('2020-07-27 10:41:12','2020-07-27 22:16:15',4,1,'','杭州市','','','套房出租',600,'天万王家塘28号',3,20,'元/月','south','2/4','/static/upload/house\\风景图.jpg',' 很便宜',0),('2020-07-30 22:47:16','2020-07-30 22:47:48',9,1,'余杭区','杭州市','南苑','天万','房东直租餼号龒号閏号线地铁口直播看房',3000,'潘家堂30号',3,90,'元/年','west','3/4','/static/upload/house\\02ba7296f48d8a350b8fd346f8a01a08.jpg','靠近东湖路',1);
+INSERT INTO `ihome_house_image` VALUES ('2020-07-30 22:47:48','2020-07-30 22:47:48',1,9,'/static/upload/house\\02ba7296f48d8a350b8fd346f8a01a08.jpg'),('2020-07-30 22:48:33','2020-07-30 22:48:33',2,9,'/static/upload/house\\45fe69c0aaee7a0abe3772b02ff0f501.jpg'),('2020-07-30 22:48:39','2020-07-30 22:48:39',3,9,'/static/upload/house\\b6b973c0cb791e31f9fff7a4fd7a14d1.jpg');
+
+
+ mysqldump -h 192.168.184.202 -P3306 -uroot -p123456 --database nfw > /tmp/1.sql
+

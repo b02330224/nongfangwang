@@ -224,6 +224,25 @@ $(document).ready(function(){
             console.log(data.flist);
              $('.register-login').hide()
              $('.user-info').show().find('.user-name').text(data.name)
+             for(obj of data.hlist) {
+                 let floors = obj.floor.split('/')
+                 obj.floor = floors[0]+'楼'
+                 if(obj.direction=='east') {
+                     obj.direction = '朝东'
+                 } else if(obj.direction=='south') {
+                     obj.direction = '朝南'
+                 } else if(obj.direction=='west') {
+                     obj.direction = '朝西'
+                 }
+                 else if(obj.direction=='north') {
+                     obj.direction = '朝北'
+                 }
+                 if(obj.have_cook_bath == 'single'){
+                     obj.have_cook_bath = '独立厨卫'
+                 } else {
+                     obj.have_cook_bath = '公用厨卫'
+                 }
+             }
               var house_html = template('a_script',{hlist: data.hlist})
             console.log('house_html', house_html)
             $('#house-list').append(house_html)

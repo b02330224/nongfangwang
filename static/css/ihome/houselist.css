@@ -164,13 +164,21 @@ body {
 .house-item a {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 
 }
 
+/*.image-container {*/
+/*    width: 28vw;*/
+/*    height: 21.333vw;*/
+/*    border-radius: .533vw*/
+/*}*/
+
 .house-item img{
     /*float: left;*/
-    width: 50%;
-    height: 300px
+    width: 30%;
+    height: 200px;
+    border-radius: 10px;
 }
 /*.landlord-pic {*/
 /*    display: inline-block;*/
@@ -185,14 +193,13 @@ body {
 /*}*/
 .house-price {
     display: inline-block;
-
     right: 0;
     bottom: 0px;
     height: 42px;
     padding: 0 12px;
     line-height: 42px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(215, 29, 29, 0.8);
     color: #fff;
     font-size: 14px;
     margin-left: 10px;
@@ -202,25 +209,22 @@ body {
 }
 .house-intro {
     padding: 5px 10px;
-    line-height: 20px;
+    line-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .house-title {
     display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /*font-size: 30px;*/
+    /*white-space: nowrap;*/
     color: #222;
     font-weight: 700;
-    font-size: 4.267vw;
-    line-height: 5.067vw;
+    font-size: 30px;
+
 }
 
 .house-detail {
     color: #222;
-    line-height: 4.267vw;
-    font-size: 2.933vw;
-    margin-bottom: 1.333vw;
+    font-size: 20px;
 }
 .house-intro>em {
     display: block;

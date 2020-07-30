@@ -251,7 +251,7 @@ def index():
 
     #hlist = House.query.order_by(House.id.desc()).all()[:10]
     hlist = hlist[:10]
-    hlist2 = [house.to_dict() for house in hlist]
+    hlist2 = [house.to_full_dict() for house in hlist]
     # 查找地区信息
     area_list = Area.query.all()
     area_dict_list = [area.to_dict() for area in area_list]
