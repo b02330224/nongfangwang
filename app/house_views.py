@@ -180,7 +180,7 @@ def del_house_image(id):
 
 @house_blueprint.route('/detail/')
 def detail():
-    return render_template('detail.html')
+    return render_template('housedetail.html')
 
 
 @house_blueprint.route('/detail/<int:id>/')
